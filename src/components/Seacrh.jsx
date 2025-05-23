@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import BookCard from './BookCard'
 
-function Search({ placeholde = "Search for Book..." }) {
+function Search({ placeholder = "Search for Book..." }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,12 +29,10 @@ function Search({ placeholde = "Search for Book..." }) {
     } finally {
       setLoading(false);
     }
-    {!loading && error==="" && books.length === 0 && searchTerm && (
+            {!loading && error === "" && books.length === 0 && searchTerm && (
           <p>No books found for "{searchTerm}"</p>
-    )}
+        )}
   }
-
-
 
   function handleKeyDown(event) {
     if (event.key === 'Escape') {
@@ -43,9 +41,9 @@ function Search({ placeholde = "Search for Book..." }) {
     if (event.key === "Enter") {
       handleSearch();
     }
-    if (event.key === "Backspace" || event.key === "Delete" || searchTerm.trim()==="" ){
-      setError("")
-      setBooks([])
+    if (event.key === "Backspace" || event.key === "Delete" || searchTerm.trim() === "") {
+      setError("");
+      setBooks([]);
     }
   }
 
@@ -60,18 +58,19 @@ function Search({ placeholde = "Search for Book..." }) {
         value={searchTerm}
         autoFocus
         className="form-control mr-sm-2"
-        placeholder={placeholde}
+        placeholder={placeholder}
         aria-label="Search"
       />
 
       <div className="results books-grid">
         {loading && <p>Searching...</p>}
         {error && <p className="error">{error}</p>}
+        
+
 
         {books.length > 0 && books.map((book, index) => (
-          <BookCard key={book.key || index} bok={book} />
+          <BookCard key={index} indx={book.key || index} bok={book} />
         ))}
-        
       </div>
     </div>
   );
