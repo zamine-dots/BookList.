@@ -41,10 +41,10 @@ function Search({ placeholder = "Search for Book..." }) {
     if (event.key === "Enter") {
       handleSearch();
     }
-    if (event.key === "Backspace" || event.key === "Delete" || searchTerm.trim() === "") {
-      setError("");
-      setBooks([]);
-    }
+  }
+  function handlechangesearchterm(){
+    setError("");
+    setBooks([]);
   }
 
   return (
@@ -53,7 +53,7 @@ function Search({ placeholder = "Search for Book..." }) {
         onKeyDown={handleKeyDown}
         onChange={(e) => {
           setSearchTerm(e.target.value);
-          handleKeyDown(e);
+          handlechangesearchterm();
         }}
         value={searchTerm}
         autoFocus
