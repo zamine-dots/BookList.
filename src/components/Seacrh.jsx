@@ -17,7 +17,7 @@ function Search({ placeholder = "Search for Book..." }) {
     setLoading(true);
     setError("");
 
-    const url = `/search.json?q=${searchTerm}`;
+    const url = `/api/search?q=${encodeURIComponent(searchTerm)}`
 
     try {
       const response = await axios.get(url);
@@ -29,9 +29,9 @@ function Search({ placeholder = "Search for Book..." }) {
     } finally {
       setLoading(false);
     }
-            {!loading && error === "" && books.length === 0 && searchTerm && (
-          <p>No books found for "{searchTerm}"</p>
-        )}
+    {!loading && error === "" && books.length === 0 && searchTerm && (
+        <p>No books found for "{searchTerm}"</p>
+      )}
   }
 
   function handleKeyDown(event) {
